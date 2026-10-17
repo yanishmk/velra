@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Velra. | Création, stratégie & automatisation IA",
-  description: "Velra transforme les idées ambitieuses en marques visibles et les tâches répétitives en temps retrouvé.",
+  title: "Velra — Agence créative, performance & automatisation IA",
+  description: "Velra réunit direction créative, contenu, acquisition et automatisation IA pour construire des marques impossibles à ignorer.",
   other: {
     "codex-preview": "development",
   },

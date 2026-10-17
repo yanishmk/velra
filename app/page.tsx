@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import {
-  ArrowUpRight,
   Bot,
   Camera,
   Check,
-  ChevronRight,
   Mail,
   Menu,
   MessageCircle,
@@ -21,52 +19,88 @@ import { useState } from "react";
 const services = [
   {
     number: "01",
+    title: "Marque & direction créative",
+    description:
+      "Une identité nette, un ton reconnaissable et un système visuel simple à faire vivre.",
+    details: ["Positionnement", "Identité visuelle", "Templates de marque"],
     icon: PenTool,
-    title: "Identité & contenu",
-    copy: "Une direction claire, des contenus qui se reconnaissent au premier regard.",
-    tag: "Création",
+    className: "service-card service-wide",
   },
   {
     number: "02",
-    icon: Camera,
     title: "Réseaux sociaux",
-    copy: "De la stratégie au calendrier éditorial, votre présence reste régulière et vivante.",
-    tag: "Communauté",
+    description:
+      "Une présence régulière qui raconte quelque chose, au lieu de seulement remplir un calendrier.",
+    details: ["Stratégie éditoriale", "Création de contenu", "Gestion & suivi"],
+    icon: Camera,
+    className: "service-card",
   },
   {
     number: "03",
+    title: "Publicité digitale",
+    description:
+      "Des campagnes conçues pour capter l’attention, apprendre vite et convertir mieux.",
+    details: ["Meta Ads", "Créatifs publicitaires", "Optimisation"],
     icon: Target,
-    title: "Ads & acquisition",
-    copy: "Des campagnes ciblées, des messages précis et des décisions guidées par les données.",
-    tag: "Performance",
+    className: "service-card",
   },
   {
     number: "04",
-    icon: Bot,
     title: "Automatisation IA",
-    copy: "Les tâches répétitives s’exécutent en arrière-plan. Votre équipe se concentre sur l’essentiel.",
-    tag: "Efficacité",
+    description:
+      "Des systèmes utiles qui répondent, organisent et relancent pendant que votre équipe avance.",
+    details: ["Workflows", "Assistants IA", "Suivis automatisés"],
+    icon: Bot,
+    className: "service-card service-wide service-dark",
   },
 ];
 
-const steps = [
+const goals = [
   {
-    title: "On clarifie",
-    copy: "Vos objectifs, votre audience, votre différence. On pose la bonne question avant de produire.",
+    label: "Se lancer",
+    eyebrow: "Créer une base solide",
+    title: "Passer d’une idée à une marque prête à être vue.",
+    copy: "On clarifie votre positionnement, construit votre univers et prépare les premiers contenus pour lancer sans improviser.",
+    deliverables: ["Plateforme de marque", "Direction visuelle", "Kit de lancement"],
   },
   {
-    title: "On construit",
-    copy: "Un univers cohérent et des systèmes simples qui rendent chaque prise de parole plus facile.",
+    label: "Se démarquer",
+    eyebrow: "Gagner en impact",
+    title: "Transformer une présence correcte en marque mémorable.",
+    copy: "On resserre le message, élève la création et relie le contenu à une stratégie d’acquisition mesurable.",
+    deliverables: ["Audit & repositionnement", "Système de contenu", "Campagnes paid"],
   },
   {
-    title: "On accélère",
-    copy: "On mesure, on automatise et on améliore ce qui fonctionne déjà pour créer un vrai momentum.",
+    label: "Se libérer",
+    eyebrow: "Automatiser l’utile",
+    title: "Retirer les tâches répétitives du quotidien.",
+    copy: "On cartographie les frictions, connecte vos outils et construit des automatisations compréhensibles par votre équipe.",
+    deliverables: ["Cartographie des processus", "Workflows IA", "Documentation claire"],
+  },
+];
+
+const process = [
+  {
+    step: "01",
+    title: "Comprendre",
+    copy: "On commence par le contexte, les objectifs et les vraies contraintes de votre équipe.",
+  },
+  {
+    step: "02",
+    title: "Construire",
+    copy: "On transforme la stratégie en identité, contenus, campagnes ou systèmes concrets.",
+  },
+  {
+    step: "03",
+    title: "Faire évoluer",
+    copy: "On mesure, ajuste et documente pour que ce qui fonctionne continue de progresser.",
   },
 ];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeService, setActiveService] = useState(3);
+  const [activeGoal, setActiveGoal] = useState(0);
+  const goal = goals[activeGoal];
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -74,184 +108,279 @@ export default function Home() {
   };
 
   return (
-    <main className="site-shell">
-      <div className="ambient ambient-one" />
-      <div className="ambient ambient-two" />
-
-      <header className="topbar">
+    <main className="site-shell" id="top">
+      <header className="nav-shell">
         <button className="brand" onClick={() => scrollTo("top")} aria-label="Velra, retour en haut">
           velra<span>.</span>
         </button>
 
-        <nav className={menuOpen ? "nav-links nav-open" : "nav-links"} aria-label="Navigation principale">
-          <button onClick={() => scrollTo("services")}>Expertises</button>
-          <button onClick={() => scrollTo("methode")}>Méthode</button>
-          <button onClick={() => scrollTo("automatisation")}>IA & automatisation</button>
-          <button onClick={() => scrollTo("contact")}>Contact</button>
+        <nav
+          className={menuOpen ? "nav-links nav-links-open" : "nav-links"}
+          id="main-navigation"
+          aria-label="Navigation principale"
+        >
+          <button onClick={() => scrollTo("expertises")}>Expertises</button>
+          <button onClick={() => scrollTo("approche")}>Approche</button>
+          <button onClick={() => scrollTo("ia")}>Automatisation IA</button>
         </nav>
 
-        <button className="topbar-cta" onClick={() => scrollTo("contact")}>
-          Parlons-nous <ArrowUpRight size={15} strokeWidth={2.3} />
+        <button className="nav-contact" onClick={() => scrollTo("contact")}>
+          Parler de votre projet
         </button>
 
-        <button className="menu-toggle" onClick={() => setMenuOpen((open) => !open)} aria-label="Ouvrir le menu">
+        <button
+          className="menu-button"
+          onClick={() => setMenuOpen((value) => !value)}
+          aria-label="Ouvrir le menu"
+          aria-expanded={menuOpen}
+          aria-controls="main-navigation"
+        >
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </header>
 
-      <section className="hero section-pad" id="top">
+      <section className="hero section-width">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-dot" /> Agence créative · Gatineau / Ottawa</div>
+          <div className="eyebrow">
+            <span /> Agence créative + technologie · Gatineau / Ottawa
+          </div>
           <h1>
-            Votre marque,
+            Des marques
             <br />
-            <span>plus claire.</span>
+            <em>impossibles</em>
             <br />
-            <strong>plus libre.</strong>
+            à ignorer.
           </h1>
-          <p className="hero-lede">
-            Velra transforme les idées ambitieuses en marques visibles — et les tâches répétitives en temps retrouvé.
+          <p>
+            Velra réunit direction créative, contenu, acquisition et automatisation IA pour faire avancer votre marque comme un seul système.
           </p>
           <div className="hero-actions">
             <button className="button button-primary" onClick={() => scrollTo("contact")}>
-              Construire quelque chose <ArrowUpRight size={17} />
+              Démarrer un projet
             </button>
-            <button className="text-button" onClick={() => scrollTo("services")}>
-              Découvrir nos expertises <ChevronRight size={16} />
+            <button className="button button-secondary" onClick={() => scrollTo("expertises")}>
+              Voir nos expertises
             </button>
           </div>
-          <div className="hero-signals">
-            <div><span>✦</span><p>Créatif par nature</p></div>
-            <div><span>⌁</span><p>Stratégique par réflexe</p></div>
-            <div><span>↗</span><p>Orienté résultats</p></div>
+          <div className="hero-proof">
+            <div>
+              <strong>Une vision</strong>
+              <span>de la stratégie à l’exécution</span>
+            </div>
+            <div>
+              <strong>Un partenaire</strong>
+              <span>créatif, proche et réactif</span>
+            </div>
           </div>
         </div>
 
-        <div className="hero-visual" aria-label="Mascotte Velra, image de marque">
-          <div className="visual-grid" />
-          <div className="hero-orbit orbit-one" />
-          <div className="hero-orbit orbit-two" />
-          <div className="hero-image-wrap">
-            <Image src="/images/velra-mascot-hero.png" alt="Mascotte Velra originale présentant une idée lumineuse" fill priority sizes="(max-width: 900px) 92vw, 48vw" className="hero-image" />
+        <div className="hero-art">
+          <div className="hero-image-frame">
+            <Image
+              src="/images/velra-hero-final.png"
+              alt="Mascotte Velra dans un studio violet"
+              fill
+              priority
+              sizes="(max-width: 820px) 92vw, 44vw"
+              className="hero-image"
+            />
           </div>
-          <div className="floating-note note-top"><Sparkles size={15} /> Idées → impact</div>
-          <div className="floating-note note-bottom"><span className="live-dot" /> Toujours en mouvement</div>
-          <div className="hero-stamp"><span>V</span><small>Velra<br />studio</small></div>
+          <div className="hero-art-label">
+            <span>Studio Velra</span>
+            <strong>Création · stratégie · systèmes</strong>
+          </div>
+          <div className="hero-art-badge">
+            <Sparkles size={16} />
+            <span>Votre idée prend forme</span>
+          </div>
         </div>
       </section>
 
-      <section className="proof-bar section-pad" aria-label="Indicateurs Velra">
-        <p className="proof-intro">Ce qu’on aime faire<br /><span>prendre de l’avance.</span></p>
-        <div className="proof-stat"><strong>360°</strong><span>de la stratégie<br />à l’exécution</span></div>
-        <div className="proof-stat"><strong>24/7</strong><span>des systèmes qui<br />travaillent pour vous</span></div>
-        <div className="proof-stat"><strong>1</strong><span>partenaire créatif<br />à vos côtés</span></div>
+      <section className="capability-strip" aria-label="Expertises principales">
+        <div className="capability-track">
+          {["Branding", "Réseaux sociaux", "Création de contenu", "Ads", "Automatisation IA", "Stratégie digitale"].map((item) => (
+            <span key={item}>{item}<i>✦</i></span>
+          ))}
+          {["Branding", "Réseaux sociaux", "Création de contenu", "Ads", "Automatisation IA", "Stratégie digitale"].map((item) => (
+            <span key={`${item}-duplicate`} aria-hidden="true">{item}<i>✦</i></span>
+          ))}
+        </div>
       </section>
 
-      <section className="services-section section-pad" id="services">
-        <div className="section-heading">
+      <section className="services section-width" id="expertises">
+        <div className="section-intro">
           <div>
-            <div className="eyebrow"><span className="eyebrow-dot purple" /> Nos expertises</div>
-            <h2>Tout ce qu’il faut pour<br /><em>rester remarquable.</em></h2>
+            <span className="section-index">01 / Expertises</span>
+            <h2>Une seule équipe.<br /><em>Quatre leviers.</em></h2>
           </div>
-          <p>Une équipe compacte, une vision large. On relie la créativité à ce qui fait vraiment avancer votre entreprise.</p>
+          <p>
+            Le message, l’image, la diffusion et les systèmes travaillent ensemble. C’est là que la marque devient plus forte — et le quotidien plus simple.
+          </p>
         </div>
 
-        <div className="services-layout">
-          <div className="service-list">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <button key={service.number} className={activeService === index ? "service-row active" : "service-row"} onClick={() => setActiveService(index)}>
-                  <span className="service-number">{service.number}</span>
-                  <span className="service-icon"><Icon size={20} strokeWidth={1.8} /></span>
-                  <span className="service-name">{service.title}</span>
-                  <ChevronRight className="service-arrow" size={19} />
+        <div className="services-grid">
+          {services.map((service) => {
+            const Icon = service.icon;
+            return (
+              <article className={service.className} key={service.number}>
+                <div className="service-top">
+                  <span>{service.number}</span>
+                  <div className="service-icon"><Icon size={22} strokeWidth={1.7} /></div>
+                </div>
+                <div>
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
+                </div>
+                <ul>
+                  {service.details.map((detail) => <li key={detail}>{detail}</li>)}
+                </ul>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="goals-section" id="approche">
+        <div className="goals-inner section-width">
+          <div className="goals-heading">
+            <span className="section-index light">02 / Votre objectif</span>
+            <h2>Pas de formule copiée-collée.</h2>
+            <p>On part de l’endroit où vous êtes, puis on construit le prochain mouvement utile.</p>
+          </div>
+
+          <div className="goals-workspace">
+            <div className="goal-tabs" role="tablist" aria-label="Choisir votre objectif">
+              {goals.map((item, index) => (
+                <button
+                  key={item.label}
+                  className={activeGoal === index ? "goal-tab active" : "goal-tab"}
+                  onClick={() => setActiveGoal(index)}
+                  aria-pressed={activeGoal === index}
+                >
+                  <span>0{index + 1}</span>{item.label}
                 </button>
-              );
-            })}
-          </div>
+              ))}
+            </div>
 
-          <div className="service-detail">
-            <div className="detail-topline"><span>0{activeService + 1} / 04</span><span>{services[activeService].tag}</span></div>
-            <div className="detail-icon">{(() => { const Icon = services[activeService].icon; return <Icon size={28} strokeWidth={1.6} />; })()}</div>
-            <h3>{services[activeService].title}</h3>
-            <p>{services[activeService].copy}</p>
-            <div className="detail-footer"><span>Ensemble, on va plus loin.</span><ArrowUpRight size={18} /></div>
+            <article className="goal-panel" aria-live="polite">
+              <span className="goal-eyebrow">{goal.eyebrow}</span>
+              <h3>{goal.title}</h3>
+              <p>{goal.copy}</p>
+              <div className="goal-deliverables">
+                {goal.deliverables.map((item) => (
+                  <div key={item}><Check size={15} />{item}</div>
+                ))}
+              </div>
+            </article>
+
+            <aside className="goal-principles">
+              <span>Ce qu’on protège</span>
+              <div><strong>Clarté</strong><i /></div>
+              <div><strong>Cohérence</strong><i /></div>
+              <div><strong>Vitesse</strong><i /></div>
+            </aside>
           </div>
         </div>
       </section>
 
-      <section className="automation-section section-pad" id="automatisation">
+      <section className="automation section-width" id="ia">
         <div className="automation-copy">
-          <div className="eyebrow light"><span className="eyebrow-dot" /> Velra intelligence</div>
-          <h2>L’IA qui travaille<br /><span>pour vous.</span></h2>
-          <p>Moins de copier-coller. Moins de relances oubliées. Plus de temps pour décider, créer et servir vos clients.</p>
-          <div className="automation-points">
-            <div><Check size={15} /><span>Réponses et suivis automatisés</span></div>
-            <div><Check size={15} /><span>Workflows adaptés à votre réalité</span></div>
-            <div><Check size={15} /><span>Des données qui restent humaines</span></div>
-          </div>
-          <button className="button button-lilac" onClick={() => scrollTo("contact")}>Imaginer mon système <ArrowUpRight size={17} /></button>
+          <span className="section-index">03 / Automatisation IA</span>
+          <h2>L’IA ne remplace pas votre équipe.</h2>
+          <h2 className="accent-heading">Elle lui rend du temps.</h2>
+          <p>
+            On automatise les passages répétitifs entre vos outils, vos prospects et votre équipe — sans transformer votre entreprise en usine incompréhensible.
+          </p>
+          <button className="button button-primary" onClick={() => scrollTo("contact")}>
+            Explorer une automatisation
+          </button>
         </div>
-        <div className="automation-visual">
-          <div className="automation-glow" />
-          <div className="automation-card card-back"><Image src="/images/velra-mascot-hero.png" alt="Mascotte Velra originale avec une tablette" fill sizes="300px" /></div>
-          <div className="automation-card card-front"><Image src="/images/velra-mascot-automation.png" alt="Mascotte Velra originale orchestrant un workflow" fill sizes="300px" /></div>
-          <div className="workflow-chip chip-one"><Mail size={16} /><span><b>Nouveau lead</b><small>traité automatiquement</small></span><Check size={15} /></div>
-          <div className="workflow-chip chip-two"><Bot size={16} /><span><b>Assistant Velra</b><small>répond en votre nom</small></span><span className="chip-pulse" /></div>
+
+        <div className="automation-board">
+          <div className="board-header">
+            <div><span className="board-dot" /> Workflow actif</div>
+            <small>Velra OS</small>
+          </div>
+          <div className="workflow">
+            <div className="workflow-node">
+              <Mail size={19} />
+              <span><small>Entrée</small><strong>Nouveau lead</strong></span>
+            </div>
+            <div className="workflow-line"><i /></div>
+            <div className="workflow-node highlighted">
+              <Bot size={19} />
+              <span><small>Analyse</small><strong>Qualification IA</strong></span>
+            </div>
+            <div className="workflow-line"><i /></div>
+            <div className="workflow-node">
+              <MessageCircle size={19} />
+              <span><small>Action</small><strong>Réponse adaptée</strong></span>
+            </div>
+            <div className="workflow-line"><i /></div>
+            <div className="workflow-node complete">
+              <Check size={19} />
+              <span><small>Suivi</small><strong>Tâche créée</strong></span>
+            </div>
+          </div>
+          <div className="board-footer">
+            <div><span>Temps humain</span><strong>réservé aux décisions</strong></div>
+            <div className="pulse-ring"><Bot size={24} /></div>
+          </div>
         </div>
       </section>
 
-      <section className="method-section section-pad" id="methode">
-        <div className="section-heading compact">
+      <section className="process section-width">
+        <div className="section-intro process-intro">
           <div>
-            <div className="eyebrow"><span className="eyebrow-dot purple" /> Notre manière de faire</div>
-            <h2>Simple à comprendre.<br /><em>Difficile à oublier.</em></h2>
+            <span className="section-index">04 / La méthode</span>
+            <h2>Clair du premier échange<br /><em>jusqu’à la suite.</em></h2>
           </div>
-          <p>On ne vous vend pas de la complexité. On vous donne un système qui fait du sens, puis on le rend mémorable.</p>
+          <p>Des étapes lisibles, des décisions expliquées et des livrables faits pour être utilisés — pas rangés dans un dossier.</p>
         </div>
-        <div className="steps-grid">
-          {steps.map((step, index) => (
-            <article className="step-card" key={step.title}>
-              <div className="step-number">0{index + 1}</div>
-              <div className="step-line" />
-              <h3>{step.title}</h3>
-              <p>{step.copy}</p>
+        <div className="process-grid">
+          {process.map((item) => (
+            <article key={item.step}>
+              <span>{item.step}</span>
+              <div className="process-rule" />
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="statement-section section-pad">
-        <div className="statement-mark">V<span>.</span></div>
-        <div>
-          <p className="statement-kicker">Votre prochain chapitre commence ici.</p>
-          <h2>On ne crée pas juste<br /><span>du bruit.</span> On crée<br />de l’élan.</h2>
+      <section className="contact section-width" id="contact">
+        <div className="contact-glow" />
+        <div className="contact-copy">
+          <span>Votre prochain mouvement</span>
+          <h2>On commence par<br />une conversation.</h2>
         </div>
-        <button className="circle-cta" onClick={() => scrollTo("contact")} aria-label="Nous contacter"><ArrowUpRight size={26} /></button>
-      </section>
-
-      <section className="contact-section section-pad" id="contact">
-        <div className="contact-card">
-          <div className="contact-main">
-            <div className="eyebrow"><span className="eyebrow-dot purple" /> Parlons de la suite</div>
-            <h2>Une idée en tête ?<br /><em>Faisons-la exister.</em></h2>
-            <p>Décrivez-nous ce que vous voulez rendre plus clair, plus visible ou plus automatique. On vous répond avec des idées concrètes.</p>
-            <a className="button button-primary" href="mailto:bonjour@velra.agency">bonjour@velra.agency <ArrowUpRight size={17} /></a>
-          </div>
-          <div className="contact-side">
-            <div className="contact-orb"><MessageCircle size={28} strokeWidth={1.4} /></div>
-            <span>Gatineau · Ottawa</span>
-            <span>Canada</span>
-            <div className="social-links"><a href="#contact" aria-label="Instagram"><Camera size={18} /></a><a href="#contact" aria-label="LinkedIn"><Network size={18} /></a><a href="mailto:bonjour@velra.agency" aria-label="Courriel"><Mail size={18} /></a></div>
-          </div>
+        <div className="contact-action">
+          <p>Parlez-nous de ce qui doit devenir plus clair, plus visible ou plus simple.</p>
+          <a className="button button-light" href="mailto:bonjour@velra.agency">
+            bonjour@velra.agency
+          </a>
         </div>
       </section>
 
-      <footer className="footer section-pad">
-        <div className="brand footer-brand">velra<span>.</span></div>
-        <p>Des idées qui font parler<br />de votre marque.</p>
-        <div className="footer-meta"><span>© 2025 Velra agency</span><span>Création · Stratégie · Impact</span></div>
+      <footer className="footer section-width">
+        <div className="footer-brand">
+          <div className="brand">velra<span>.</span></div>
+          <p>Création · stratégie · impact</p>
+        </div>
+        <div className="footer-location">
+          <span>Gatineau / Ottawa</span>
+          <span>Canada</span>
+        </div>
+        <div className="footer-links">
+          <a href="mailto:bonjour@velra.agency"><Mail size={17} /> Courriel</a>
+          <span><Camera size={17} /> Instagram</span>
+          <span><Network size={17} /> LinkedIn</span>
+        </div>
+        <div className="footer-bottom">
+          <span>© 2026 Velra Agency</span>
+          <button onClick={() => scrollTo("top")}>Retour en haut</button>
+        </div>
       </footer>
     </main>
   );
