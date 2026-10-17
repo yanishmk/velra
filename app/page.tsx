@@ -132,7 +132,7 @@ export default function Home() {
           <div className="hero-orbit orbit-one" />
           <div className="hero-orbit orbit-two" />
           <div className="hero-image-wrap">
-            <Image src="/images/mascot-hero.png" alt="Mascotte Velra portant un hoodie violet" fill priority sizes="(max-width: 900px) 92vw, 48vw" className="hero-image" />
+            <Image src="/images/velra-mascot-hero.png" alt="Mascotte Velra originale présentant une idée lumineuse" fill priority sizes="(max-width: 900px) 92vw, 48vw" className="hero-image" />
           </div>
           <div className="floating-note note-top"><Sparkles size={15} /> Idées → impact</div>
           <div className="floating-note note-bottom"><span className="live-dot" /> Toujours en mouvement</div>
@@ -195,8 +195,8 @@ export default function Home() {
         </div>
         <div className="automation-visual">
           <div className="automation-glow" />
-          <div className="automation-card card-back"><Image src="/images/mascot-orders.png" alt="Mascotte Velra gérant une commande" fill sizes="300px" /></div>
-          <div className="automation-card card-front"><Image src="/images/mascot-email.png" alt="Mascotte Velra automatisant des emails" fill sizes="300px" /></div>
+          <div className="automation-card card-back"><Image src="/images/velra-mascot-hero.png" alt="Mascotte Velra originale avec une tablette" fill sizes="300px" /></div>
+          <div className="automation-card card-front"><Image src="/images/velra-mascot-automation.png" alt="Mascotte Velra originale orchestrant un workflow" fill sizes="300px" /></div>
           <div className="workflow-chip chip-one"><Mail size={16} /><span><b>Nouveau lead</b><small>traité automatiquement</small></span><Check size={15} /></div>
           <div className="workflow-chip chip-two"><Bot size={16} /><span><b>Assistant Velra</b><small>répond en votre nom</small></span><span className="chip-pulse" /></div>
         </div>
