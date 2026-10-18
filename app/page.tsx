@@ -3,6 +3,7 @@
 import Image from "next/image";
 import {
   Bot,
+  Calendar,
   Camera,
   Check,
   Mail,
@@ -18,29 +19,25 @@ const services = [
     number: "01",
     icon: PenTool,
     title: "Identité",
-    copy: "Une marque claire, cohérente et facile à reconnaître.",
-    detail: "Positionnement · identité visuelle",
+    copy: "Une marque claire et reconnaissable.",
   },
   {
     number: "02",
     icon: Camera,
     title: "Réseaux sociaux",
-    copy: "Du contenu pensé pour attirer, engager et rester en tête.",
-    detail: "Stratégie · création · gestion",
+    copy: "Du contenu qui attire et engage.",
   },
   {
     number: "03",
     icon: Target,
     title: "Publicité",
-    copy: "Des campagnes créatives qui transforment l’attention en résultats.",
-    detail: "Meta Ads · créatifs · optimisation",
+    copy: "Des campagnes pensées pour convertir.",
   },
   {
     number: "04",
     icon: Bot,
     title: "Automatisation IA",
-    copy: "Moins de tâches répétitives. Plus de temps pour avancer.",
-    detail: "Workflows · assistants · suivis",
+    copy: "Moins de tâches. Plus de temps.",
   },
 ];
 
@@ -65,8 +62,8 @@ export default function Home() {
           <a href="mailto:bonjour@velra.agency">Contact</a>
         </nav>
 
-        <a className="nav-cta" href="mailto:bonjour@velra.agency">
-          Parlons de votre projet
+        <a className="nav-cta" href="mailto:bonjour@velra.agency?subject=Prendre%20un%20rendez-vous%20avec%20Velra">
+          Prendre rendez-vous
         </a>
 
         <button
@@ -88,14 +85,14 @@ export default function Home() {
             <span>plus forte.</span>
           </h1>
           <p className="hero-lead">
-            Création, réseaux sociaux, publicité et IA réunis pour faire avancer votre entreprise simplement.
+            Création, publicité et IA pour faire avancer votre marque.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="mailto:bonjour@velra.agency">
-              Démarrer un projet
+            <a className="button primary" href="mailto:bonjour@velra.agency?subject=Prendre%20un%20rendez-vous%20avec%20Velra">
+              <Calendar size={17} /> Prendre rendez-vous
             </a>
             <button className="button secondary" onClick={() => scrollTo("services")}>
-              Découvrir Velra
+              Nos services
             </button>
           </div>
         </div>
@@ -116,10 +113,10 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Ce qu’on fait</p>
-            <h2>Une équipe.<br /><span>Quatre expertises.</span></h2>
+            <h2>Quatre expertises.<br /><span>Un même cap.</span></h2>
           </div>
           <p className="section-lead">
-            La stratégie, la création, l’acquisition et l’automatisation travaillent ensemble pour faire avancer votre marque.
+            Une marque visible, cohérente et efficace.
           </p>
         </div>
 
@@ -136,7 +133,6 @@ export default function Home() {
                   <h3>{service.title}</h3>
                   <p>{service.copy}</p>
                 </div>
-                <small>{service.detail}</small>
               </article>
             );
           })}
@@ -148,10 +144,10 @@ export default function Home() {
           <p className="eyebrow">Automatisation IA</p>
           <h2>Moins de répétition.<br /><span>Plus d’élan.</span></h2>
           <p>
-            Nous connectons vos outils pour répondre, organiser et relancer automatiquement — sans compliquer votre quotidien.
+            Vos outils répondent, organisent et relancent automatiquement.
           </p>
           <div className="benefits">
-            <span><Check size={16} /> Réponses automatiques</span>
+            <span><Check size={16} /> Réponses 24/7</span>
             <span><Check size={16} /> Suivis clients</span>
             <span><Check size={16} /> Moins d’erreurs</span>
           </div>
@@ -181,7 +177,7 @@ export default function Home() {
               <div><small>Suivi</small><strong>Équipe informée</strong></div>
             </div>
           </div>
-          <p className="automation-caption"><span>24/7</span> Une logique simple, visible et documentée.</p>
+          <p className="automation-caption"><span>24/7</span> Simple. Visible. Automatique.</p>
         </div>
       </section>
 
@@ -193,7 +189,7 @@ export default function Home() {
         <div className="contact-main">
           <h2>Une bonne idée mérite<br /><span>un vrai mouvement.</span></h2>
           <div>
-            <p>Parlez-nous de ce que vous voulez rendre plus clair, plus visible ou plus simple.</p>
+            <p>Un projet en tête? Parlons-en.</p>
             <a className="button light-button" href="mailto:bonjour@velra.agency">
               bonjour@velra.agency
             </a>
