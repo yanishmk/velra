@@ -59,10 +59,10 @@ export default function Home() {
         <nav className={menuOpen ? "nav-links open" : "nav-links"} aria-label="Navigation principale">
           <button onClick={() => scrollTo("services")}>Services</button>
           <button onClick={() => scrollTo("ia")}>Automatisation IA</button>
-          <a href="mailto:bonjour@velra.agency">Contact</a>
+          <a href="mailto:velracommunication@gmail.com">Contact</a>
         </nav>
 
-        <a className="nav-cta" href="mailto:bonjour@velra.agency?subject=Prendre%20un%20rendez-vous%20avec%20Velra">
+        <a className="nav-cta" href="mailto:velracommunication@gmail.com?subject=Prendre%20un%20rendez-vous%20avec%20Velra">
           Prendre rendez-vous
         </a>
 
@@ -88,7 +88,7 @@ export default function Home() {
             Création, publicité et IA pour faire avancer votre marque.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="mailto:bonjour@velra.agency?subject=Prendre%20un%20rendez-vous%20avec%20Velra">
+            <a className="button primary" href="mailto:velracommunication@gmail.com?subject=Prendre%20un%20rendez-vous%20avec%20Velra">
               <Calendar size={17} /> Prendre rendez-vous
             </a>
             <button className="button secondary" onClick={() => scrollTo("services")}>
@@ -151,7 +151,7 @@ export default function Home() {
             <span><Check size={16} /> Suivis clients</span>
             <span><Check size={16} /> Moins d’erreurs</span>
           </div>
-          <a className="button ai-button" href="mailto:bonjour@velra.agency">
+          <a className="button ai-button" href="mailto:velracommunication@gmail.com">
             Explorer une automatisation
           </a>
         </div>
@@ -190,8 +190,8 @@ export default function Home() {
           <h2>Une bonne idée mérite<br /><span>un vrai mouvement.</span></h2>
           <div>
             <p>Un projet en tête? Parlons-en.</p>
-            <a className="button light-button" href="mailto:bonjour@velra.agency">
-              bonjour@velra.agency
+            <a className="button light-button" href="mailto:velracommunication@gmail.com">
+              velracommunication@gmail.com
             </a>
           </div>
         </div>
