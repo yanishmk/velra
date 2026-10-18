@@ -15,21 +15,25 @@ import { useState } from "react";
 
 const services = [
   {
+    number: "01",
     icon: PenTool,
     title: "Identité",
     copy: "Une marque claire, cohérente et facile à reconnaître.",
   },
   {
+    number: "02",
     icon: Camera,
     title: "Réseaux sociaux",
     copy: "Du contenu pensé pour attirer, engager et rester en tête.",
   },
   {
+    number: "03",
     icon: Target,
     title: "Publicité",
     copy: "Des campagnes créatives qui transforment l’attention en résultats.",
   },
   {
+    number: "04",
     icon: Bot,
     title: "Automatisation IA",
     copy: "Moins de tâches répétitives. Plus de temps pour avancer.",
@@ -93,11 +97,6 @@ export default function Home() {
         </div>
 
         <div className="mascot-stage" aria-label="Mascotte Velra">
-          <div className="soft-orb" />
-          <span className="spark spark-one">✦</span>
-          <span className="spark spark-two">✦</span>
-          <div className="floating-note note-top">Idées qui avancent</div>
-          <div className="floating-note note-bottom">Créatif + efficace</div>
           <Image
             className="mascot"
             src="/images/velra-mascot-simple-v2.png"
@@ -120,9 +119,13 @@ export default function Home() {
             const Icon = service.icon;
             return (
               <article className="service-card" key={service.title}>
-                <div className="service-icon"><Icon size={22} strokeWidth={1.8} /></div>
+                <div className="service-card-top">
+                  <div className="service-icon"><Icon size={22} strokeWidth={1.8} /></div>
+                  <span>{service.number}</span>
+                </div>
                 <h3>{service.title}</h3>
                 <p>{service.copy}</p>
+                <div className="service-rule" />
               </article>
             );
           })}
@@ -166,6 +169,7 @@ export default function Home() {
       </section>
 
       <section className="contact page-width" id="contact">
+        <span className="contact-mark" aria-hidden="true">✦</span>
         <div>
           <p>Une idée en tête ?</p>
           <h2>On la fait avancer.</h2>
