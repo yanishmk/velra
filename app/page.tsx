@@ -19,24 +19,28 @@ const services = [
     icon: PenTool,
     title: "Identité",
     copy: "Une marque claire, cohérente et facile à reconnaître.",
+    detail: "Positionnement · identité visuelle",
   },
   {
     number: "02",
     icon: Camera,
     title: "Réseaux sociaux",
     copy: "Du contenu pensé pour attirer, engager et rester en tête.",
+    detail: "Stratégie · création · gestion",
   },
   {
     number: "03",
     icon: Target,
     title: "Publicité",
     copy: "Des campagnes créatives qui transforment l’attention en résultats.",
+    detail: "Meta Ads · créatifs · optimisation",
   },
   {
     number: "04",
     icon: Bot,
     title: "Automatisation IA",
     copy: "Moins de tâches répétitives. Plus de temps pour avancer.",
+    detail: "Workflows · assistants · suivis",
   },
 ];
 
@@ -110,22 +114,29 @@ export default function Home() {
 
       <section className="services page-width" id="services">
         <div className="section-heading">
-          <p className="eyebrow">Ce qu’on fait</p>
-          <h2>Tout ce qu’il faut.<br /><span>Rien de trop.</span></h2>
+          <div>
+            <p className="eyebrow">Ce qu’on fait</p>
+            <h2>Une équipe.<br /><span>Quatre expertises.</span></h2>
+          </div>
+          <p className="section-lead">
+            La stratégie, la création, l’acquisition et l’automatisation travaillent ensemble pour faire avancer votre marque.
+          </p>
         </div>
 
         <div className="service-grid">
-          {services.map((service) => {
+          {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <article className="service-card" key={service.title}>
+              <article className={`service-card service-card-${index + 1}`} key={service.title}>
                 <div className="service-card-top">
                   <div className="service-icon"><Icon size={22} strokeWidth={1.8} /></div>
                   <span>{service.number}</span>
                 </div>
-                <h3>{service.title}</h3>
-                <p>{service.copy}</p>
-                <div className="service-rule" />
+                <div className="service-content">
+                  <h3>{service.title}</h3>
+                  <p>{service.copy}</p>
+                </div>
+                <small>{service.detail}</small>
               </article>
             );
           })}
@@ -134,8 +145,8 @@ export default function Home() {
 
       <section className="ai-section page-width" id="ia">
         <div className="ai-copy">
-          <p className="eyebrow light">Automatisation IA</p>
-          <h2>Votre entreprise avance, même quand vous êtes occupé.</h2>
+          <p className="eyebrow">Automatisation IA</p>
+          <h2>Moins de répétition.<br /><span>Plus d’élan.</span></h2>
           <p>
             Nous connectons vos outils pour répondre, organiser et relancer automatiquement — sans compliquer votre quotidien.
           </p>
@@ -144,39 +155,51 @@ export default function Home() {
             <span><Check size={16} /> Suivis clients</span>
             <span><Check size={16} /> Moins d’erreurs</span>
           </div>
+          <a className="button ai-button" href="mailto:bonjour@velra.agency">
+            Explorer une automatisation
+          </a>
         </div>
 
-        <div className="automation-card" aria-label="Exemple de processus automatisé">
-          <div className="automation-top">
-            <span><i /> Système actif</span>
-            <small>Velra IA</small>
+        <div className="automation-stage">
+          <div className="automation-card" aria-label="Exemple de processus automatisé">
+            <div className="automation-top">
+              <span><i /> Système actif</span>
+              <small>Velra IA</small>
+            </div>
+            <div className="automation-step">
+              <Mail size={20} />
+              <div><small>Nouveau message</small><strong>Demande reçue</strong></div>
+            </div>
+            <div className="connector" />
+            <div className="automation-step featured">
+              <Bot size={20} />
+              <div><small>Action automatique</small><strong>Réponse préparée</strong></div>
+            </div>
+            <div className="connector" />
+            <div className="automation-step">
+              <Check size={20} />
+              <div><small>Suivi</small><strong>Équipe informée</strong></div>
+            </div>
           </div>
-          <div className="automation-step">
-            <Mail size={20} />
-            <div><small>Nouveau message</small><strong>Demande reçue</strong></div>
-          </div>
-          <div className="connector" />
-          <div className="automation-step featured">
-            <Bot size={20} />
-            <div><small>Action automatique</small><strong>Réponse préparée</strong></div>
-          </div>
-          <div className="connector" />
-          <div className="automation-step">
-            <Check size={20} />
-            <div><small>Suivi</small><strong>Équipe informée</strong></div>
-          </div>
+          <p className="automation-caption"><span>24/7</span> Une logique simple, visible et documentée.</p>
         </div>
       </section>
 
       <section className="contact page-width" id="contact">
-        <span className="contact-mark" aria-hidden="true">✦</span>
-        <div>
-          <p>Une idée en tête ?</p>
-          <h2>On la fait avancer.</h2>
+        <div className="contact-topline">
+          <span>Votre prochain projet</span>
+          <span>Gatineau · Ottawa · À distance</span>
         </div>
-        <a className="button light-button" href="mailto:bonjour@velra.agency">
-          bonjour@velra.agency
-        </a>
+        <div className="contact-main">
+          <h2>Une bonne idée mérite<br /><span>un vrai mouvement.</span></h2>
+          <div>
+            <p>Parlez-nous de ce que vous voulez rendre plus clair, plus visible ou plus simple.</p>
+            <a className="button light-button" href="mailto:bonjour@velra.agency">
+              bonjour@velra.agency
+            </a>
+          </div>
+        </div>
+        <span className="contact-word" aria-hidden="true">velra.</span>
       </section>
 
       <footer className="footer page-width">
