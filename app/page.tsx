@@ -190,9 +190,14 @@ export default function Home() {
           <h2>Une bonne idée mérite<br /><span>un vrai mouvement.</span></h2>
           <div>
             <p>Un projet en tête? Parlons-en.</p>
-            <a className="button light-button" href="mailto:velracommunication@gmail.com">
-              velracommunication@gmail.com
-            </a>
+            <div className="contact-actions">
+              <a className="button light-button" href="mailto:velracommunication@gmail.com">
+                velracommunication@gmail.com
+              </a>
+              <a className="button phone-button" href="tel:+15145704038">
+                514 570-4038
+              </a>
+            </div>
           </div>
         </div>
         <span className="contact-word" aria-hidden="true">velra.</span>
