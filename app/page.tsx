@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useSiteMotion } from "@/components/use-site-motion";
 
 const services = [
   {
@@ -46,6 +47,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [today, setToday] = useState("");
   const [reservationSent, setReservationSent] = useState(false);
+  useSiteMotion();
 
   useEffect(() => {
     const localDate = new Date();
@@ -61,6 +63,7 @@ export default function Home() {
 
   return (
     <main id="top">
+      <div className="scroll-progress" aria-hidden="true" />
       <header className="nav-shell">
         <button className="brand" onClick={() => scrollTo("top")} aria-label="Velra, retour en haut">
           velra<span>.</span>
@@ -88,17 +91,16 @@ export default function Home() {
 
       <section className="hero page-width">
         <div className="hero-copy">
-          <p className="eyebrow">Agence créative · Gatineau / Ottawa</p>
-          <h1>
-            Votre marque,
-            <br />
-            <span>plus forte.</span>
+          <p className="eyebrow hero-in" style={{ "--d": "0ms" } as React.CSSProperties}>Agence créative · Gatineau / Ottawa</p>
+          <h1 aria-label="Votre marque, plus forte.">
+            <span className="line-mask" aria-hidden="true"><span className="line" style={{ "--d": "120ms" } as React.CSSProperties}>Votre marque,</span></span>
+            <span className="line-mask" aria-hidden="true"><span className="line accent" style={{ "--d": "240ms" } as React.CSSProperties}>plus forte.</span></span>
           </h1>
-          <p className="hero-lead">
+          <p className="hero-lead hero-in" style={{ "--d": "420ms" } as React.CSSProperties}>
             Création, publicité et IA pour faire avancer votre marque.
           </p>
-          <div className="hero-actions">
-            <button className="button primary" onClick={() => scrollTo("rendez-vous")}>
+          <div className="hero-actions hero-in" style={{ "--d": "540ms" } as React.CSSProperties}>
+            <button className="button primary" data-magnetic onClick={() => scrollTo("rendez-vous")}>
               <Calendar size={17} /> Prendre rendez-vous
             </button>
             <button className="button secondary" onClick={() => scrollTo("services")}>
@@ -108,6 +110,7 @@ export default function Home() {
         </div>
 
         <div className="mascot-stage" aria-label="Mascotte Velra">
+          <div className="mascot-float">
           <Image
             className="mascot"
             src="/images/velra-mascot-simple-v2.png"
@@ -116,11 +119,12 @@ export default function Home() {
             priority
             sizes="(max-width: 820px) 92vw, 44vw"
           />
+          </div>
         </div>
       </section>
 
       <section className="booking page-width" id="rendez-vous">
-        <div className="booking-intro">
+        <div className="booking-intro" data-reveal>
           <span className="booking-icon"><PhoneCall size={21} /></span>
           <div>
             <p className="eyebrow">Appel découverte</p>
@@ -129,7 +133,7 @@ export default function Home() {
           </div>
         </div>
 
-        <form className="booking-form" action="https://formsubmit.co/velracommunication@gmail.com" method="POST">
+        <form className="booking-form" data-reveal style={{ "--d": "120ms" } as React.CSSProperties} action="https://formsubmit.co/velracommunication@gmail.com" method="POST">
           <input type="hidden" name="_subject" value="Nouvelle demande d’appel — Site Velra" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
@@ -165,7 +169,7 @@ export default function Home() {
       </section>
 
       <section className="services page-width" id="services">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <div>
             <p className="eyebrow">Ce qu’on fait</p>
             <h2>Quatre expertises.<br /><span>Un même cap.</span></h2>
@@ -179,7 +183,12 @@ export default function Home() {
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <article className={`service-card service-card-${index + 1}`} key={service.title}>
+              <article
+                className={`service-card service-card-${index + 1}`}
+                key={service.title}
+                data-reveal
+                style={{ "--d": `${index * 110}ms` } as React.CSSProperties}
+              >
                 <div className="service-card-top">
                   <div className="service-icon"><Icon size={22} strokeWidth={1.8} /></div>
                   <span>{service.number}</span>
@@ -195,7 +204,7 @@ export default function Home() {
       </section>
 
       <section className="ai-section page-width" id="ia">
-        <div className="ai-copy">
+        <div className="ai-copy" data-reveal>
           <p className="eyebrow">Automatisation IA</p>
           <h2>Moins de répétition.<br /><span>Plus d’élan.</span></h2>
           <p>
@@ -211,23 +220,23 @@ export default function Home() {
           </a>
         </div>
 
-        <div className="automation-stage">
+        <div className="automation-stage" data-reveal style={{ "--d": "150ms" } as React.CSSProperties}>
           <div className="automation-card" aria-label="Exemple de processus automatisé">
             <div className="automation-top">
               <span><i /> Système actif</span>
               <small>Velra IA</small>
             </div>
-            <div className="automation-step">
+            <div className="automation-step step-1">
               <Mail size={20} />
               <div><small>Nouveau message</small><strong>Demande reçue</strong></div>
             </div>
-            <div className="connector" />
-            <div className="automation-step featured">
+            <div className="connector"><i /></div>
+            <div className="automation-step featured step-2">
               <Bot size={20} />
               <div><small>Action automatique</small><strong>Réponse préparée</strong></div>
             </div>
-            <div className="connector" />
-            <div className="automation-step">
+            <div className="connector"><i /></div>
+            <div className="automation-step step-3">
               <Check size={20} />
               <div><small>Suivi</small><strong>Équipe informée</strong></div>
             </div>
@@ -237,16 +246,16 @@ export default function Home() {
       </section>
 
       <section className="contact page-width" id="contact">
-        <div className="contact-topline">
+        <div className="contact-topline" data-reveal>
           <span>Votre prochain projet</span>
           <span>Gatineau · Ottawa · À distance</span>
         </div>
-        <div className="contact-main">
+        <div className="contact-main" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
           <h2>Une bonne idée mérite<br /><span>un vrai mouvement.</span></h2>
           <div>
             <p>Un projet en tête? Parlons-en.</p>
             <div className="contact-actions">
-              <a className="button light-button" href="mailto:velracommunication@gmail.com">
+              <a className="button light-button" data-magnetic href="mailto:velracommunication@gmail.com">
                 velracommunication@gmail.com
               </a>
               <a className="button phone-button" href="tel:+15145704038">

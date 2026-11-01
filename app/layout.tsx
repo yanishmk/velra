@@ -19,7 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
+      <head>
+        {/* Active les animations avant le premier affichage (évite un flash du contenu) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){var r=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;r.classList.add('motion-ready');setTimeout(function(){if(!r.classList.contains('motion-live'))r.classList.remove('motion-ready')},4000)})()",
+          }}
+        />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );
