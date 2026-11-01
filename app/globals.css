@@ -65,7 +65,9 @@ main { min-height: 100vh; overflow: hidden; width: 100%; }
 .hero-copy { min-width: 0; }
 .eyebrow { color: #666978; font-size: 12px; font-weight: 750; letter-spacing: 0.12em; margin: 0; text-transform: uppercase; }
 .hero h1 { font-size: clamp(66px, 6.9vw, 100px); font-weight: 840; letter-spacing: -0.08em; line-height: 0.91; margin: 21px 0 22px; }
-.hero h1 span { color: var(--violet); }
+.hero h1 .accent { color: var(--violet); }
+.hero h1 .line-mask { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.hero h1 .line { display: block; }
 .hero-lead { color: var(--muted); font-size: clamp(17px, 1.5vw, 20px); line-height: 1.58; margin: 0; max-width: 600px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 26px; }
 .button { align-items: center; border-radius: 999px; display: inline-flex; font-size: 14px; font-weight: 750; gap: 8px; justify-content: center; min-height: 52px; padding: 0 23px; transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease; }
@@ -273,7 +275,85 @@ main { min-height: 100vh; overflow: hidden; width: 100%; }
   .footer p, .footer > span { grid-column: 1; justify-self: start; }
 }
 
+/* ============================================================
+   Animations
+   ============================================================ */
+:root { --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --scroll-progress: 0; }
+
+/* Barre de progression de lecture */
+.scroll-progress { background: linear-gradient(90deg, var(--violet), #a68cff); height: 3px; left: 0; pointer-events: none; position: fixed; right: 0; top: 0; transform: scaleX(var(--scroll-progress)); transform-origin: 0 50%; z-index: 100; }
+
+/* Nav : ombre douce une fois qu'on a défilé */
+.nav-shell { transition: box-shadow 300ms ease, background 300ms ease; }
+.is-scrolled .nav-shell { background: rgba(248, 248, 251, 0.94); box-shadow: 0 10px 30px rgba(31, 22, 74, 0.07); }
+.brand span { display: inline-block; transition: transform 400ms var(--ease-out); }
+.brand:hover span { transform: translateY(-4px) scale(1.25); }
+
+/* Hero : entrée au chargement */
+@keyframes rise-in { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes line-up { from { transform: translateY(105%); } to { transform: none; } }
+.motion-ready .hero-in { animation: rise-in 900ms var(--ease-out) both; animation-delay: var(--d, 0ms); }
+.motion-ready .hero h1 .line { animation: line-up 1000ms var(--ease-out) both; animation-delay: var(--d, 0ms); }
+
+/* Mascotte : entrée, flottement, inclinaison vers la souris */
+@keyframes mascot-in { from { opacity: 0; transform: translateY(40px) scale(0.9); } to { opacity: 1; transform: none; } }
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+@keyframes glow { 0%, 100% { opacity: 0.85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes shadow-breathe { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(0.82); opacity: 0.6; } }
+.mascot-stage { perspective: 900px; }
+.mascot-float { inset: 0; position: absolute; transform: translateX(var(--shift-x, 0px)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); transition: transform 600ms var(--ease-out); z-index: 2; }
+.motion-ready .mascot-stage { animation: mascot-in 1100ms var(--ease-out) 250ms both; }
+.motion-ready .mascot-float { animation: float 5s ease-in-out 1.3s infinite; }
+.motion-ready .mascot-stage::before { animation: glow 5s ease-in-out 1.3s infinite; }
+.motion-ready .mascot-stage::after { animation: shadow-breathe 5s ease-in-out 1.3s infinite; }
+
+/* Boutons magnétiques */
+[data-magnetic] { translate: var(--mx, 0px) var(--my, 0px); transition: background 180ms ease, color 180ms ease, transform 180ms ease, translate 350ms var(--ease-out); }
+
+/* Apparition au scroll */
+.motion-ready [data-reveal] { opacity: 0; transform: translateY(34px); transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); transition-delay: var(--d, 0ms); }
+.motion-ready [data-reveal].is-visible { opacity: 1; transform: none; }
+.motion-ready .automation-stage[data-reveal] { transform: translateY(34px) scale(0.96); }
+.motion-ready .automation-stage[data-reveal].is-visible { transform: none; }
+
+/* Cartes de services : une fois apparues, retour aux transitions de survol rapides */
+.motion-ready .service-card[data-reveal].is-visible { transition: opacity 800ms var(--ease-out) var(--d, 0ms), transform 300ms var(--ease-out), background 180ms ease, border-color 180ms ease; }
+.motion-ready .service-card[data-reveal].is-visible:hover { transform: translateY(-6px); }
+.service-icon { transition: transform 450ms var(--ease-out), background 200ms ease; }
+.service-card:hover .service-icon { transform: rotate(-8deg) scale(1.1); }
+.service-card::after { transition: transform 700ms var(--ease-out); }
+.service-card:hover::after { transform: scale(1.35); }
+.service-card::before { transition: width 500ms var(--ease-out); }
+.service-card:hover::before { width: 110px; }
+
+/* Section IA : le système travaille en boucle */
+@keyframes live-dot { 0% { box-shadow: 0 0 0 0 rgba(88,201,155,0.55); } 100% { box-shadow: 0 0 0 9px rgba(88,201,155,0); } }
+@keyframes step-active {
+  0%, 4% { border-color: rgba(255,255,255,0.08); box-shadow: none; transform: none; }
+  10%, 30% { border-color: rgba(183,163,255,0.75); box-shadow: 0 0 0 4px rgba(116,72,255,0.18), 0 12px 30px rgba(116,72,255,0.25); transform: translateX(6px); }
+  40%, 100% { border-color: rgba(255,255,255,0.08); box-shadow: none; transform: none; }
+}
+@keyframes flow { 0% { top: -6px; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+.automation-card { transition: transform 600ms var(--ease-out); }
+.automation-card:hover { transform: rotate(0deg) translateY(-4px); }
+.automation-top i { animation: live-dot 1.8s ease-out infinite; }
+.automation-step { position: relative; }
+.automation-card.is-running .automation-step { animation: step-active 4.2s var(--ease-out) infinite; }
+.automation-card.is-running .step-2 { animation-delay: 1.4s; }
+.automation-card.is-running .step-3 { animation-delay: 2.8s; }
+.connector { position: relative; }
+.connector i { background: #b7a3ff; border-radius: 50%; box-shadow: 0 0 8px #b7a3ff; height: 5px; left: -2px; opacity: 0; position: absolute; top: 0; width: 5px; }
+.automation-card.is-running .connector i { animation: flow 1.4s ease-in-out infinite; }
+.automation-card.is-running .step-2 + .connector i { animation-delay: 0.7s; }
+
+/* Contact : le grand « velra. » glisse doucement au scroll */
+.contact-word { transform: translateX(var(--drift, 0px)); will-change: transform; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .button, .nav-cta, .service-card { transition: none; }
+  *, *::before, *::after { animation: none !important; }
+  .motion-ready [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .mascot-float, .contact-word { transform: none; }
+  [data-magnetic] { translate: none; }
 }
